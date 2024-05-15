@@ -104,6 +104,15 @@ public class PersonasParticipantesView {
                 showAlert("Por favor seleccione un negocio fiduciario.", Alert.AlertType.ERROR);
                 return;
             }
+            if (!nombre.matches("[a-zA-Z]+") || !apellido.matches("[a-zA-Z]+")) {
+                showAlert("El nombre y el apellido deben contener solo letras.", Alert.AlertType.ERROR);
+                return;
+            }
+
+            if (!numeroDocumento.matches("\\d+")) {
+                showAlert("El número de documento debe contener solo números.", Alert.AlertType.ERROR);
+                return;
+            }
 
             int idNegocio = negocioSeleccionado.getIdNegocioFiduciario();
             boolean creada = controller.agregarPersonaParticipante(nombre, apellido, tipoDocumento, numeroDocumento, idNegocio);

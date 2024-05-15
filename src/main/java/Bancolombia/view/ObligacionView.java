@@ -238,11 +238,16 @@ public class ObligacionView {
         actualizarButton.setOnAction(event -> {
             try {
                 int idObligacion = comboBoxObligacionExistenteActualizar.getSelectionModel().getSelectedItem().getIdObligacion();
+                String descripcion = descripcionField.getText().trim();
                 BigDecimal monto = new BigDecimal(montoField.getText().trim());
                 LocalDate fechaVencimiento = fechaVencimientoPicker.getValue();
                 NegocioFiduciario negocioSeleccionado = comboBoxNegociosActualizar.getSelectionModel().getSelectedItem();
                 if (negocioSeleccionado == null) {
                     showAlert("Por favor seleccione un negocio fiduciario.", Alert.AlertType.ERROR);
+                    return;
+                }
+                if (descripcion.isEmpty()) {
+                    showAlert("Por favor ingrese una descripción a la obligación.", Alert.AlertType.ERROR);
                     return;
                 }
                 int idNegocio = negocioSeleccionado.getIdNegocioFiduciario();
@@ -396,7 +401,7 @@ public class ObligacionView {
             table.setItems(FXCollections.observableArrayList(obligacion));
         } else {
             table.setItems(FXCollections.observableArrayList());
-            showAlert("No se encontró la obligación con ID " + id, Alert.AlertType.INFORMATION);
+            showAlert("No se encontró la obligación con ID " + id, Alert.AlertType.ERROR);
         }
     }
 

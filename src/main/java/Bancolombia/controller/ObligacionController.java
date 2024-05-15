@@ -25,6 +25,10 @@ public class ObligacionController {
 
     public boolean crearObligacion(String descripcion, BigDecimal monto, LocalDate fechaVencimiento, int idNegocio) {
         try {
+            if (descripcion == null || descripcion.trim().isEmpty()) {
+                showAlert("La descripción de la obligación no puede estar vacía.", Alert.AlertType.ERROR);
+                return false;
+            }
             boolean resultado = obligacionService.agregarObligacion(descripcion, monto, fechaVencimiento, idNegocio);
             if (!resultado) {
                 showAlert("No se pudo crear la obligación. Verifique los datos ingresados.", Alert.AlertType.ERROR);

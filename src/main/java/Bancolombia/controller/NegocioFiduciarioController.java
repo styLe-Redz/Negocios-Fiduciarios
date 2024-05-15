@@ -2,6 +2,7 @@ package Bancolombia.controller;
 
 import Bancolombia.model.NegocioFiduciario;
 import Bancolombia.model.service.NegocioFiduciarioService;
+import javafx.scene.control.Alert;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,6 +18,10 @@ public class NegocioFiduciarioController {
 
     public boolean crearNegocio(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin) {
         try {
+            if (nombre == null || nombre.trim().isEmpty()) {
+                showAlert("El nombre del negocio fiduciario no puede estar vacío.", Alert.AlertType.ERROR);
+                return false;
+            }
             return negocioFiduciarioService.crearNegocio(nombre, descripcion, fechaInicio, fechaFin);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -54,5 +59,13 @@ public class NegocioFiduciarioController {
 
     public NegocioFiduciario findNegocioByIdWithRelations(int id) throws SQLException {
         return negocioFiduciarioService.findByIdWithRelations(id);
+    }
+
+    private void showAlert(String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle("Información");
+        alert.setHeaderText(null); // No header
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

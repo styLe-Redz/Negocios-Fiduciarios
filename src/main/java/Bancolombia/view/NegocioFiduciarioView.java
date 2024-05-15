@@ -254,7 +254,7 @@ public class NegocioFiduciarioView {
                 table.setItems(FXCollections.observableArrayList(negocio));
             } else {
                 table.setItems(FXCollections.observableArrayList());
-                showAlert("No se encontró el negocio con ID " + id, Alert.AlertType.INFORMATION);
+                showAlert("No se encontró el negocio con ID " + id, Alert.AlertType.ERROR);
             }
         } catch (SQLException e) {
             e.printStackTrace();

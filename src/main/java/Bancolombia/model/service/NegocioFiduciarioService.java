@@ -17,7 +17,7 @@ public class NegocioFiduciarioService {
 
     public boolean crearNegocio(String nombre, String descripcion, LocalDate fechaInicio, LocalDate fechaFin) throws SQLException {
         if (dao.nombreExiste(nombre)) {
-            System.out.println("El nombre del negocio ya existe.");
+            //System.out.println("El nombre del negocio ya existe.");
             return false;
         }
 
